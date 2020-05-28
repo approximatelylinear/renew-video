@@ -3,6 +3,7 @@ import * as firebase from "firebase/app";
 import "firebase/analytics";
 import "firebase/auth";
 import "firebase/firestore";
+// import * as App from './react_app';
 
 const configuration = {
   iceServers: [
@@ -22,6 +23,15 @@ let remoteStream = null;
 let roomDialog = null;
 let roomId = null;
 
+function logRooms() {
+  const db = firebase.firestore();
+  db.collection("rooms").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`);
+    });
+});
+}
+
 function init() {
   mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
   document.querySelector('#cameraBtn').addEventListener('click', openUserMedia);
@@ -29,6 +39,7 @@ function init() {
   document.querySelector('#createBtn').addEventListener('click', createRoom);
   document.querySelector('#joinBtn').addEventListener('click', joinRoom);
   roomDialog = new mdc.dialog.MDCDialog(document.querySelector('#room-dialog'));
+  logRooms();
 }
 
 async function createRoom() {
@@ -36,6 +47,7 @@ async function createRoom() {
   document.querySelector('#joinBtn').disabled = true;
   const db = firebase.firestore();
   const roomRef = await db.collection('rooms').doc();
+  console.log(roomRef);
 
   console.log('Create PeerConnection with configuration: ', configuration);
   peerConnection = new RTCPeerConnection(configuration);

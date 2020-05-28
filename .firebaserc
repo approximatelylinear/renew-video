@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "fir-rtc-89b99",
+    "dev": "videopong-ad5c1",
+    "staging": "videopong-ad5c1"
+  }
+}
