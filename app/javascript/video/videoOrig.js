@@ -277,20 +277,20 @@ function registerPeerConnectionListeners() {
 }
 
 
-document.addEventListener("DOMContentLoaded", function(event){
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyCjrfQe_g1ZBHT5Jl2y-TMQku-Spm_pydU",
-    authDomain: "videopong-ad5c1.firebaseapp.com",
-    databaseURL: "https://videopong-ad5c1.firebaseio.com",
-    projectId: "videopong-ad5c1",
-    storageBucket: "videopong-ad5c1.appspot.com",
-    messagingSenderId: "576207421492",
-    appId: "1:576207421492:web:32e2ed9d71650009b3ca61",
-    measurementId: "G-RB990BFPCC"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
-  init();
-});
+// document.addEventListener("DOMContentLoaded", function(event){
+//   // Your web app's Firebase configuration
+//   var firebaseConfig = {
+//     apiKey: "AIzaSyCjrfQe_g1ZBHT5Jl2y-TMQku-Spm_pydU",
+//     authDomain: "videopong-ad5c1.firebaseapp.com",
+//     databaseURL: "https://videopong-ad5c1.firebaseio.com",
+//     projectId: "videopong-ad5c1",
+//     storageBucket: "videopong-ad5c1.appspot.com",
+//     messagingSenderId: "576207421492",
+//     appId: "1:576207421492:web:32e2ed9d71650009b3ca61",
+//     measurementId: "G-RB990BFPCC"
+//   };
+//   // Initialize Firebase
+//   firebase.initializeApp(firebaseConfig);
+//   firebase.analytics();
+//   init();
+// });

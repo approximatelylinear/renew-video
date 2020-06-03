@@ -5,8 +5,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { useHistory } from "react-router-dom";
 
-import Button from 'react-bootstrap/Button';
-
 export default function CreateChannelButton(props) {
     const history = useHistory();
     const name = props.channel.name || uuidv4();

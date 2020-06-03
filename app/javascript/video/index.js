@@ -6,10 +6,12 @@ import "firebase/analytics";
 import "firebase/auth";
 import "firebase/firestore";
 
-import '../video/index.css';
-import App from '../video/App';
+import './App.css';
+import './app.scss';
+import App from './App';
 
-import * as serviceWorker from '../video/serviceWorker';
+
+import * as serviceWorker from './serviceWorker';
 
 
 function initFirebase() {

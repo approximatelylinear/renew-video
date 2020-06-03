@@ -18,9 +18,6 @@ import "firebase/analytics";
 import "firebase/auth";
 import "firebase/firestore";
 
-import './App.css';
-import './app.scss';
-
 import Header from './Header';
 import JoinChannelCard from './JoinChannelCard';
 import CreateChannelCard from './CreateChannelCard';
@@ -185,8 +182,8 @@ export default class App extends React.Component {
     };
     console.log('joinChannel channel', channel);
     // TODO: This function is clearly trying to do two things by settings state and returning a value. Refactor this...
-    this.setState({ 
-      currentChannelId: id, 
+    this.setState({
+      currentChannelId: id,
       currentChannelName: channel.name,
       isCaller: false, });
     return {
