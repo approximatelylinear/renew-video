@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
-  resources :articles
-  root 'pages#hello'
+  # get 'react_homepage/index'
+  # resources :articles
+  # root 'pages#hello'
+  # get 'pages/about'
+  # get 'pages/video'
 
-  get 'pages/about'
+  root 'pages#index'
+  # Delegate all other routes to frontend router
+  # match '*path', to: 'pages#video', via: :all
 
-  get 'pages/video'
 end

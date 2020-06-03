@@ -1,0 +1,2 @@
+module ReactHomepageHelper
+end
