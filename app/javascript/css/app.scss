@@ -148,7 +148,7 @@ $brandWhite200: rgba(255, 255, 255, 0.2);
 
 .header {
     height: 95vh;
-    background-image: linear-gradient(to right bottom, rgba($brandAqua100, .2), rgba($brandBlue600, 0.7)), url('./assets/brandIllustrationsOnboardingConversations@3x.png');
+    background-image: linear-gradient(to right bottom, rgba($brandAqua100, .2), rgba($brandBlue600, 0.7)), url('../images/brandIllustrationsOnboardingConversations@3x.png');
     background-size: cover;
     background-position: top;
     position: relative;
@@ -159,7 +159,7 @@ $brandWhite200: rgba(255, 255, 255, 0.2);
 
   .subheader {
     height: 25vh;
-    background-image: linear-gradient(to right bottom, rgba($brandAqua100, .2), rgba($brandBlue600, 0.7)), url('./assets/brandIllustrationsOnboardingConversations@3x.png');
+    background-image: linear-gradient(to right bottom, rgba($brandAqua100, .2), rgba($brandBlue600, 0.7)), url('../images/brandIllustrationsOnboardingConversations@3x.png');
     background-size: cover;
     background-position: top;
     position: relative;
