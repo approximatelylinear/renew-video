@@ -14,16 +14,20 @@
     "@testing-library/user-event": "^7.1.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "^4.3.1",
-    "firebase": "^7.14.3",
+    "firebase": "^7.14.6",
     "jquery": "^3.4.1",
     "material-components-web": "^6.0.0",
+    "node-sass": "^4.14.1",
     "popper.js": "^1.15.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.4.1",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "react-bootstrap": "^1.0.1",
+    "uuid": "^8.1.0",
+    "webrtc-adapter": "^7.6.1"
   },
   "version": "0.1.0",
   "devDependencies": {
