@@ -24,6 +24,7 @@ export default class VideoContainer extends React.Component {
         this.state = {
             currentChannelId: props.currentChannelId,
             cameraOn: false,
+            callStarted: false,
         };
         console.log('is caller?', props.isCaller);
     }
@@ -70,6 +71,7 @@ export default class VideoContainer extends React.Component {
 
     async makeCall(channelId) {
         console.log('makeCall channelId', channelId);
+        this.setState({ callStarted: true });
         const signallingChannel = new FirebaseSignallingChannel(channelId);
         const channelRef = await signallingChannel.createChannelRef(channelId);
         console.log(channelRef);
@@ -81,6 +83,7 @@ export default class VideoContainer extends React.Component {
 
     async receiveCall(channelId) {
         console.log('receiveCall channelId', channelId);
+        this.setState({ callStarted: true });
         const signallingChannel = new FirebaseSignallingChannel(channelId);
         const channelRef = await signallingChannel.createChannelRef(channelId);
         console.log('receiveCall channelRef', channelRef);
@@ -99,53 +102,74 @@ export default class VideoContainer extends React.Component {
         //         <Video id="localVideo" stream={localStream} className="video-sm pos-fixed"></Video>
         //     </Row>
         // );
-        const cameraOffElems = (
-            <Row>
-                <p className="c-brand-black-100">Please turn the camera on to connect</p>
-            </Row>
-        );        
-        const cameraOnElems = (
-            <Row>
-                <div>
-                    <VideoWithStream stream={this.state.localStream} kind='local' className="video-sm pos-fixed"></VideoWithStream>
-                    <VideoWithStream stream={this.state.remoteStream} kind='remote' className="margin-sm video-lg bg-black"></VideoWithStream>               
-                </div>
-            </Row>
-        );
-        const defaultCameraControls = (
-            <Row>
-                <Col>
-                    <CameraButton onStartCamera={this.openCamera}>
-                    </CameraButton>
-                </Col>
-                <Col>
-                    <HangupButton onHangup={this.hangUp}> cameraOn={this.state.cameraOn}</HangupButton>
-                </Col>
-            </Row>
-        );        
         const startCallButton = (
             <Col>
-                <div className="startcall-btn" onClick={this.handleMakeCall}>
-                </div>
-                <p>Call</p>
+                {
+                    this.state.callStarted ?
+                    <div>
+                        <div className="startcall-btn-disabled">
+                        </div>
+                        <p className="c-brand-light-gray">Call</p>
+                    </div>
+                    :
+                    <div>
+                        <div className="startcall-btn" onClick={this.handleMakeCall}>
+                        </div>
+                        <p>Call</p>
+                    </div>
+                }
             </Col>);
         const answerCallButton = (
             <Col>
-                <div className="answer-btn" onClick={this.handleReceiveCall}>
-                </div>
-                <p>Answer</p>
+                {
+                    this.state.callStarted ?
+                    <div>
+                        <div className="answer-btn-disabled">
+                        </div>
+                        <p className="c-brand-light-gray">Answer</p>
+                    </div>
+                    :
+                    <div>
+                        <div className="answer-btn" onClick={this.handleReceiveCall}>
+                        </div>
+                        <p>Answer</p>
+                    </div>
+                }
             </Col>);
-        const cameraOnControls = (
-            <Row>
-                { defaultCameraControls }
-                { this.props.isCaller ? startCallButton : answerCallButton }
-            </Row>
-        )
+        const cameraOffElems = (
+            <div>
+                <Row>
+                    <Col>
+                        <CameraButton onStartCamera={this.openCamera} disabled={this.state.cameraOn}>
+                        </CameraButton>
+                    </Col>
+                    <Col>
+                        <HangupButton onHangup={this.hangUp}> cameraOn={this.state.cameraOn}</HangupButton>
+                    </Col>
+                </Row>
+                <Row>
+                    <p className="c-brand-black-100">Please turn the camera on to connect</p>
+                </Row>
+            </div>
+        );
+        const cameraOnElems = (
+            <div>
+                <Row>
+                    {this.props.isCaller ? startCallButton : answerCallButton}
+                    <Col>
+                        <HangupButton onHangup={this.hangUp}> cameraOn={this.state.cameraOn}</HangupButton>
+                    </Col>
+                </Row>
+                <Row>
+                    <div>
+                        <VideoWithStream stream={this.state.localStream} kind='local' className="video-sm pos-fixed"></VideoWithStream>
+                        <VideoWithStream stream={this.state.remoteStream} kind='remote' className="margin-sm video-lg bg-black"></VideoWithStream>
+                    </div>
+                </Row>
+            </div>
+        );
         return (
             <Container fluid className="pos-relative">
-                {
-                    this.state.cameraOn ? cameraOnControls : defaultCameraControls
-                } 
                 {
                     this.state.cameraOn ? cameraOnElems : cameraOffElems
                 }

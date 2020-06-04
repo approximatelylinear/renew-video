@@ -7,6 +7,6 @@ Rails.application.routes.draw do
 
   root 'pages#index'
   # Delegate all other routes to frontend router
-  # match '*path', to: 'pages#video', via: :all
+  match '*path', to: 'pages#video', via: :all
 
 end

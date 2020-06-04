@@ -8,7 +8,22 @@ export default class VideoWithStream extends React.Component {
     }
 
     componentDidMount() {
+        const props = this.props;
+        let startTime = window.performance.now();
         this.updateVideoStream();
+        this.videoRef.current.addEventListener('loadedmetadata', function() {
+            console.log(`${props.kind} video videoWidth: ${this.videoWidth}px, videoHeight: ${this.videoHeight}px`);
+        });
+        if (this.props.kind === 'remote') {
+            this.videoRef.current.addEventListener('resize', function() {
+                console.log(`${props.kind} video size changed to ${this.videoWidth}x${this.videoHeight}`);
+                if (startTime) {
+                    const elapsedTime = window.performance.now() - startTime;
+                    console.log('Setup time: ' + elapsedTime.toFixed(3) + 'ms');
+                    startTime = null;
+                }
+            });
+        }
     }
 
     componentDidUpdate(prevProps) {
