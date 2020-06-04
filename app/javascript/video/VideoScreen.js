@@ -24,7 +24,7 @@ export default function VideoScreen(props) {
         <div>
             <VideoHeader></VideoHeader>
             <span>
-                <h3 className="c-brand-blue-100">Joined Call</h3> 
+                <h3 className="c-brand-blue-100">Joined Call</h3>
                 <h3>{currentChannelName}</h3>
             </span>
             <Container fluid className="pos-relative">

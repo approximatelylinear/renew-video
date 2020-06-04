@@ -13,7 +13,7 @@ export default function CreateChannelButton(props) {
     const createChannelAndNavigate = function (name) {
         onCreateChannel(name).then(
             result => {
-                console.log(`Create channel button channel id: ${result.channel.id}`);
+                // console.log(`Create channel button channel id: ${result.channel.id}`);
                 history.push(`video/${result.channel.id}`);
             }
         )

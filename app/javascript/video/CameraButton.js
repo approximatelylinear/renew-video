@@ -12,7 +12,5 @@ export default function CameraButton(props) {
         </div>
         <p>Turn on camera</p>
     </div>);
-    console.log('camera disabled?', props.disabled);
-    console.log(buttonOn);
     return props.disabled ? buttonOn : buttonOff;
 }

@@ -4,6 +4,8 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Media from 'react-bootstrap/Media';
+import Toast from 'react-bootstrap/Toast';
 
 import CameraButton from './CameraButton';
 import HangupButton from './HangupButton';
@@ -21,12 +23,15 @@ export default class VideoContainer extends React.Component {
         this.makeCall = this.makeCall.bind(this);
         this.handleReceiveCall = this.handleReceiveCall.bind(this);
         this.handleMakeCall = this.handleMakeCall.bind(this);
+        this.toggleShowToast = this.toggleShowToast.bind(this);
         this.state = {
             currentChannelId: props.currentChannelId,
             cameraOn: false,
             callStarted: false,
+            showToast: true,
         };
         console.log('is caller?', props.isCaller);
+        this.toastRef = React.createRef();
     }
 
     handleMakeCall(e) {
@@ -92,6 +97,10 @@ export default class VideoContainer extends React.Component {
         await videoService.receiveCall();
     }
 
+    toggleShowToast() {
+        this.setState({ showToast: !this.state.showToast });
+    }
+
     render() {
         // console.log('video render state: ', this.state);
         const localStream = this.state.localStream;
@@ -103,73 +112,93 @@ export default class VideoContainer extends React.Component {
         //     </Row>
         // );
         const startCallButton = (
-            <Col>
+            <div>
                 {
                     this.state.callStarted ?
-                    <div>
-                        <div className="startcall-btn-disabled">
+                        <div>
+                            <div className="startcall-btn-disabled">
+                            </div>
+                            <p className="c-brand-light-gray">Call</p>
                         </div>
-                        <p className="c-brand-light-gray">Call</p>
-                    </div>
-                    :
-                    <div>
-                        <div className="startcall-btn" onClick={this.handleMakeCall}>
+                        :
+                        <div>
+                            <div className="startcall-btn" onClick={this.handleMakeCall}>
+                            </div>
+                            <p>Call</p>
                         </div>
-                        <p>Call</p>
-                    </div>
                 }
-            </Col>);
+            </div>);
         const answerCallButton = (
-            <Col>
+            <div>
                 {
                     this.state.callStarted ?
-                    <div>
-                        <div className="answer-btn-disabled">
+                        <div>
+                            <div className="answer-btn-disabled">
+                            </div>
+                            <p className="c-brand-light-gray">Answer</p>
                         </div>
-                        <p className="c-brand-light-gray">Answer</p>
-                    </div>
-                    :
-                    <div>
-                        <div className="answer-btn" onClick={this.handleReceiveCall}>
+                        :
+                        <div>
+                            <div className="answer-btn" onClick={this.handleReceiveCall}>
+                            </div>
+                            <p>Answer</p>
                         </div>
-                        <p>Answer</p>
-                    </div>
                 }
-            </Col>);
+            </div>);
         const cameraOffElems = (
             <div>
                 <Row>
-                    <Col>
+                    <Toast show={this.state.showToast} onClose={this.toggleShowToast} ref={this.toastRef}>
+                        <Toast.Header>
+                            {/* <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" /> */}
+                            <strong className="mr-auto">Renew</strong>
+                        </Toast.Header>
+                        <Toast.Body>Turn on your camera to connect</Toast.Body>
+                    </Toast>
+                </Row>
+                <Row>
+                    <Media>
+                        <Media.Body>
+                            <CameraButton onStartCamera={this.openCamera} disabled={this.state.cameraOn}>
+                            </CameraButton>
+                            <HangupButton onHangup={this.hangUp}> cameraOn={this.state.cameraOn}</HangupButton>
+                        </Media.Body>
+                    </Media>
+                    {/* <Col>
                         <CameraButton onStartCamera={this.openCamera} disabled={this.state.cameraOn}>
                         </CameraButton>
                     </Col>
                     <Col>
                         <HangupButton onHangup={this.hangUp}> cameraOn={this.state.cameraOn}</HangupButton>
-                    </Col>
-                </Row>
-                <Row>
-                    <p className="c-brand-black-100">Please turn the camera on to connect</p>
+                    </Col> */}
                 </Row>
             </div>
         );
         const cameraOnElems = (
             <div>
                 <Row>
-                    {this.props.isCaller ? startCallButton : answerCallButton}
-                    <Col>
+                    <Media>
+                        <div>
+                            {/* <VideoWithStream stream={this.state.localStream} kind='local' className="video-sm"></VideoWithStream> */}
+                            {/* <VideoWithStream stream={this.state.localStream} kind='local' className="video-sm"></VideoWithStream> */}
+                            <VideoWithStream stream={this.state.remoteStream} kind='remote' className="video-lg"></VideoWithStream>
+                            <VideoWithStream stream={this.state.localStream} kind='local' className="video-sm"></VideoWithStream>
+                            {/* <VideoWithStream stream={this.state.remoteStream} kind='remote' className="margin-sm video-lg bg-black"></VideoWithStream> */}
+                            {/* <VideoWithStream stream={this.state.remoteStream} kind='remote' className="margin-sm video-lg bg-black"></VideoWithStream> */}
+                        </div>
+                        <Media.Body>
+                            {this.props.isCaller ? startCallButton : answerCallButton}
+                            <HangupButton onHangup={this.hangUp}> cameraOn={this.state.cameraOn}</HangupButton>
+                            {/* <Col>
                         <HangupButton onHangup={this.hangUp}> cameraOn={this.state.cameraOn}</HangupButton>
-                    </Col>
-                </Row>
-                <Row>
-                    <div>
-                        <VideoWithStream stream={this.state.localStream} kind='local' className="video-sm pos-fixed"></VideoWithStream>
-                        <VideoWithStream stream={this.state.remoteStream} kind='remote' className="margin-sm video-lg bg-black"></VideoWithStream>
-                    </div>
+                    </Col> */}
+                        </Media.Body>
+                    </Media>
                 </Row>
             </div>
         );
         return (
-            <Container fluid className="pos-relative">
+            <Container fluid className="pos-relative video-container">
                 {
                     this.state.cameraOn ? cameraOnElems : cameraOffElems
                 }

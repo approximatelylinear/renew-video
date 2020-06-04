@@ -182,71 +182,71 @@ $brandWhite200: rgba(255, 255, 255, 0.2);
 
   }
 
-  .subheader {
-    height: 25vh;
-    background-image: linear-gradient(to right bottom, rgba($brandAqua100, .2), rgba($brandBlue600, 0.7)), url('../images/brandIllustrationsOnboardingConversations@3x.png');
-    background-size: cover;
-    background-position: top;
-    position: relative;
+.subheader {
+  height: 25vh;
+  background-image: linear-gradient(to right bottom, rgba($brandAqua100, .2), rgba($brandBlue600, 0.7)), url('../images/brandIllustrationsOnboardingConversations@3x.png');
+  background-size: cover;
+  background-position: top;
+  position: relative;
 
-    clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
 
+}
+
+.logo-box {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+
+.logo {
+  height: 35px;
+}
+
+.text-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  backface-visibility: hidden;
+}
+
+.heading-primary-main {
+  display: block;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 10px;
+
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}
+
+.heading-primary-sub {
+  display: block;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 8px;
+}
+
+@keyframes moveInLeft {
+  0% {
+      opacity: 0;
+      transform: translateX(-100px);
   }
 
-  .logo-box {
-    position: absolute;
-    top: 40px;
-    left: 40px;
+  80% {
+      transform: translateX(10px);
   }
 
-  .logo {
-    height: 35px;
+  100% {
+      opacity: 1;
+      transform: translate(0);
   }
-
-  .text-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .heading-primary {
-    color: #fff;
-    text-transform: uppercase;
-    backface-visibility: hidden;
-  }
-
-  .heading-primary-main {
-    display: block;
-    font-size: 40px;
-    font-weight: 700;
-    letter-spacing: 10px;
-
-    animation-name: moveInLeft;
-    animation-duration: 1s;
-    animation-timing-function: ease-in-out;
-  }
-
-  .heading-primary-sub {
-    display: block;
-    font-size: 20px;
-    font-weight: 400;
-    letter-spacing: 8px;
-  }
-
-  @keyframes moveInLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-100px);
-    }
-
-    80% {
-        transform: translateX(10px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translate(0);
-    }
-  }
+}
 
